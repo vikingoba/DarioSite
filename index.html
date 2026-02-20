@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Depo Jeans</title>
+<style>
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1a1a1a;
+    color: white;
+}
+
+/* Header */
+header {
+    background-color: #0a0a0a;
+    padding: 40px 20px;
+    text-align: center;
+    border-bottom: 3px solid rgba(255, 0, 0, 0.6);
+}
+
+.logo {
+    font-size: 48px;
+    font-weight: bold;
+    letter-spacing: 5px;
+}
+
+/* Navegación - usé flexbox que vi en YouTube */
+nav {
+    background-color: #2a2a2a;
+    padding: 15px;
+    position: sticky;
+    top: 0;
+}
+
+.menu {
+    display: flex;
+    justify-content: center; /* AGREGÁ ESTA LÍNEA */
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+
+/* Botones - agregué hover y efecto vidrio suavizado */
+.menu button {
+    background-color: rgba(58, 58, 58, 0.4);
+    color: white;
+    border: 2px solid rgba(85, 85, 85, 0.5);
+    padding: 12px 25px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.4s ease;
+    backdrop-filter: blur(8px);
+}
+
+.menu button:hover {
+    background-color: rgba(180, 0, 0, 0.25);
+    border-color: rgba(200, 0, 0, 0.6);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(180, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* Grid - aprendí esto */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.card {
+    background-color: #2a2a2a;
+    padding: 25px;
+    border-left: 4px solid rgba(200, 0, 0, 0.8);
+}
+
+.card h3 {
+    color: #ff0000;
+    margin-bottom: 15px;
+}
+
+/* Grid de productos */
+.productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.producto {
+    background-color: rgba(42, 42, 42, 0.5);
+    padding: 25px;
+    border: 2px solid rgba(58, 58, 58, 0.4);
+    text-align: center;
+    transition: all 0.4s ease;
+    backdrop-filter: blur(10px);
+}
+
+/* Todavía estoy probando este efecto hover */
+.producto:hover {
+    border-color: rgba(200, 0, 0, 0.6);
+    transform: translateY(-8px);
+    backdrop-filter: blur(15px);
+    background-color: rgba(42, 42, 42, 0.7);
+    box-shadow: 0 10px 25px rgba(180, 0, 0, 0.12);
+}
+
+.nombre {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.precio-lista {
+    color: #999;
+    margin: 8px 0;
+}
+
+.precio-efectivo {
+    font-size: 22px;
+    font-weight: bold;
+    color: #00ff00;
+}
+
+/* Subcategoría - efecto suavizado */
+.sub {
+    background-color: rgba(58, 58, 58, 0.4);
+    cursor: pointer;
+    border-color: rgba(200, 0, 0, 0.5);
+}
+
+.sub:hover {
+    background-color: rgba(180, 0, 0, 0.2);
+    border-color: rgba(200, 0, 0, 0.7);
+}
+
+/* Badge oferta */
+.badge {
+    background-color: rgba(200, 0, 0, 0.9);
+    color: white;
+    padding: 5px 10px;
+    font-size: 12px;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.btn-volver {
+    background-color: rgba(58, 58, 58, 0.4);
+    color: white;
+    border: 2px solid rgba(85, 85, 85, 0.5);
+    padding: 10px 25px;
+    cursor: pointer;
+    margin-bottom: 25px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+}
+
+.btn-volver:hover {
+    background-color: rgba(85, 85, 85, 0.6);
+    border-color: rgba(120, 120, 120, 0.7);
+    transform: translateX(-3px);
+}
+
+.titulo {
+    font-size: 36px;
+    border-bottom: 3px solid rgba(200, 0, 0, 0.7);
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.titulo-oferta {
+    color: rgba(220, 0, 0, 0.9);
+    font-size: 20px;
+    margin: 30px 0 15px;
+}
+
+footer {
+    background-color: #0a0a0a;
+    text-align: center;
+    padding: 30px;
+    margin-top: 60px;
+    border-top: 3px solid rgba(200, 0, 0, 0.6);
+    color: #777;
+}
+
+/* Para ocultar secciones */
+.oculto {
+    display: none;
+}
+
+/* TODO: Mejorar esto para que sea más responsive en móviles */
+</style>
+</head>
+<body>
+
+<header>
+<div class="logo">DEPO JEANS</div>
+<p style="color:rgba(200,0,0,0.9);margin-top:10px">Berazategui, Buenos Aires</p>
+</header>
+
+<nav>
+<div class="menu">
+<button onclick="ir('inicio')">INICIO</button>
+<button onclick="ir('remeras')">REMERAS</button>
+<button onclick="ir('jeans')">JEANS</button>
+<button onclick="ir('bermudas')">LINO</button>
+<button onclick="ir('lino')">BERMUDAS</button>
+<button onclick="ir('gabardina')">GABARDINA</button>
+<button onclick="ir('chombas')">CHOMBAS</button>
+<button onclick="ir('camisas')">CAMISAS</button>
+<button onclick="ir('sweaters')">SWEATERS</button> 
+<button onclick="ir('accesorios')">ACCESORIOS</button>
+<button onclick="ir('buzos')">BUZOS</button>
+</div>
+</nav>
+
+<div class="container">
+
+<div id="inicio">
+<h1 style="text-align:center;font-size:42px;margin:30px 0">Indumentaria Masculina</h1>
+<p style="text-align:center;color:#aaa;margin-bottom:40px">Las mejores marcas al mejor precio</p>
+
+<div style="text-align:center;margin-bottom:40px">
+<a href="https://www.instagram.com/depojeans/" target="_blank" style="display:inline-block;background-color:#E1306C;color:white;padding:12px 30px;text-decoration:none;font-size:18px;font-weight:bold;border-radius:8px;transition:0.3s">
+📷 Seguinos en Instagram
+</a>
+</div>
+
+<div class="info-grid">
+<div class="card">
+<h3>💳 Medios de Pago</h3>
+<p><strong>Efectivo:</strong> 15% descuento</p>
+<p><strong>Crédito Bancaria:</strong> 3 cuotas sin interés</p>
+<p><strong>Financiera:</strong> 3 cuotas con 15% recargo</p>
+<p><strong>Débito:</strong> Precio de lista</p>
+</div>
+<div class="card">
+<h3>🔄 Cambios</h3>
+<p><strong>Plazo:</strong> 30 días</p>
+<p><strong>Valorización:</strong> Precio de lista</p>
+</div>
+</div>
+
+<div style="margin-top:50px">
+<h2 style="color:rgba(200,0,0,0.9);font-size:28px;text-align:center;margin-bottom:30px">📍 Nuestras Sucursales</h2>
+<div style="background-color:#2a2a2a;padding:30px;border-left:4px solid rgba(200,0,0,0.8);margin-bottom:20px">
+<h3 style="color:rgba(200,0,0,0.9);margin-bottom:20px">🕐 Horario de Atención</h3>
+<p style="font-size:18px"><strong>Lunes a Sábado:</strong> 9:00 AM - 20:00 PM</p>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px">
+<div class="card">
+<h3>📍 Berazategui</h3>
+<p>Av. 14 N° 4777</p>
+<p>Av. 14 N° 4775</p>
+</div>
+<div class="card">
+<h3>📍 Quilmes</h3>
+<p>Av. Rivadavia 150</p>
+<p>Av. Rivadavia 220</p>
+</div>
+<div class="card">
+<h3>📍 Lomas de Zamora</h3>
+<p>Laprida 296</p>
+</div>
+<div class="card">
+<h3>📍 Solano</h3>
+<p>Av. 844 N° 2417</p>
+<p>Av. 844 N° 2419</p>
+</div>
+<div class="card">
+<h3>📍 Florencio Varela</h3>
+<p>Monteagudo 3189</p>
+</div>
+<div class="card">
+<h3>📍 Flores</h3>
+<p>Av. Avellaneda 2977</p>
+</div>
+</div>
+
+<div style="background-color:#2a2a2a;padding:30px;border-left:4px solid rgba(200,0,0,0.8);margin-top:30px;text-align:center">
+<h3 style="color:rgba(200,0,0,0.9);margin-bottom:15px">📦 Pedidos por Mayor</h3>
+<p style="font-size:20px;font-weight:bold">
+<a href="tel:+541138454255" style="color:#00ff00;text-decoration:none">+54 11 3845-4255</a>
+</p>
+</div>
+</div>
+</div>
+
+<div id="remeras" class="oculto">
+<button class="btn-volver" onclick="ir('inicio')">← Volver</button>
+<h2 class="titulo">REMERAS</h2>
+<div class="productos">
+<div class="producto"><div class="nombre">Remera Lisa</div><div class="precio-lista">$19.000</div><div class="precio-efectivo">$16.000</div></div>
+<div class="producto"><div class="nombre">Slim Fit</div><div class="precio-lista">$21.500</div><div class="precio-efectivo">$18.500</div></div>
+<div class="producto sub" onclick="ir('r-over')"><div class="nombre">Oversize →</div></div>
+<div class="producto sub" onclick="ir('r-imp')"><div class="nombre">Importadas →</div></div>
+<div class="producto"><div class="badge">OFERTA</div><div class="nombre">Remera Oferta</div><div class="precio-lista">$16.000</div><div class="precio-efectivo">$13.500</div></div>
+</div>
+</div>
+
+<div id="r-over" class="oculto">
+<button class="btn-volver" onclick="ir('remeras')">← Volver</button>
+<h2 class="titulo">OVERSIZE</h2>
+<div class="productos">
+<div class="producto"><div class="nombre">Oversize</div><div class="precio-lista">$22.500</div><div class="precio-efectivo">$19.000</div></div>
+<div class="producto"><div class="nombre">Oversize City Puños</div><div class="precio-lista">$26.000</div><div class="precio-efectivo">$22.000</div></div>
+</div>
+</div>
+
+<div id="r-imp" class="oculto">
+<button class="btn-volver" onclick="ir('remeras')">← Volver</button>
+<h2 class="titulo">IMPORTADAS</h2>
+
+<div class="productos">
+    <div class="producto">
+        <div class="nombre">Piqué</div>
+        <div class="precio-lista">$27.000</div>
+        <div class="precio-efectivo">$23.000</div>
+    </div>
+
+    <div class="producto">
+        <div class="nombre">Tramada</div>
+        <div class="precio-lista">$32.000</div>
+        <div class="precio-efectivo">$27.000</div>
+    </div>
+
+    <div class="producto">
+        <div class="nombre">Tramada Spandex</div>
+        <div class="precio-lista">$32.000</div>
+        <div class="precio-efectivo">$27.000</div>
+    </div>
+
+    <div class="producto">
+        <div class="nombre">Waffle</div>
+        <div class="precio-lista">$32.000</div>
+        <div class="precio-efectivo">$27.000</div>
+    </div>
+</div>
+</div>
+
+<div id="jeans" class="oculto">
+<button class="btn-volver" onclick="ir('inicio')">← Volver</button>
+<h2 class="titulo">JEANS</h2>
+<div class="productos">
+<div class="producto sub" onclick="ir('j-ela')"><div class="nombre">Elastizados →</div></div>
+<div class="producto sub" onclick="ir('j-mom')"><div class="nombre">Mom →</div></div>
+<div class="producto sub" onclick="ir('j-semi')"><div class="nombre">Semiclásicos →</div></div>
+<div class="producto sub" onclick="ir('j-clas')"><div class="nombre">Clásicos →</div></div>
+<div class="producto sub" onclick="ir('j-bag')"><div class="nombre">Baggys →</div></div>
+<div class="producto sub" onclick="ir('j-car')"><div class="nombre">Cargos →</div></div>
+<div class="producto sub" onclick="ir('j-ofer')"><div class="badge">OFERTAS</div><div class="nombre">Ofertas →</div></div>
+<div class="producto sub" onclick="ir('j-camps')"><div class="nombre">Camperas →</div></div>
+</div>
+</div>
+
+<div id="j-ela" class="oculto">
+<button class="btn-volver" onclick="ir('jeans')">← Volver</button>
+<h2 class="titulo">ELASTIZADOS</h2>
+<div class="productos">
+<div class="producto"><div class="nombre">JNS Never</div><div class="precio-lista">$42.500</div><div class="precio-efectivo">$36.000</div></div>
+<div class="producto"><div class="nombre">JNS Stats</div><div class="precio-lista">$42.500</div><div class="precio-efectivo">$36.000</div></div>
+<div class="producto"><div class="nombre">JNS Roll</div><div class="precio-lista">$42.500</div><div class="precio-efectivo">$36.000</div></div>
+<div class="producto"><div class="nombre">JNS Stuart</div><div class="precio-lista">$42.500</div><div class="precio-efectivo">$36.000</div></div>
+<div class="producto"><div class="nombre">JNS Hachen</div><div class="precio-lista">$42.500</div><div class="precio-efectivo">$36.000</div></div>
+<div class="producto"><div class="nombre">JNS Statico Negro</div><div class="precio-lista">$42.500</div><div class="precio-efectivo">$36.000</div></div>
+</div>
+</div>
+
+<div id="j-mom" class="oculto">
+<button class="btn-volver" onclick="ir('jeans')">← Volver</button>
+<h2 class="titulo">MOM</h2>
+<div class="productos">
+<div class="producto"><div class="nombre">Mom Alex</div><div class="precio-lista">$42.500</div><div class="precio-efectivo">$36.000</div></div>
+<div class="producto"><div class="nombre">Mom West</div><div class="precio-lista">$42.500</div><div class="precio-efectivo">$36.000</div></div>
+<div class="producto"><div class="nombre">Mom Ari</div><div class="precio-lista">$42.500</div><div class="precio-efectivo">$36.000</div></div>
+<div class="producto"><div class="nombre">Statico Noah</div><div class="precio-lista">$42.500</div><div class="precio-efectivo">$36.000</div></div>
+<div class="producto"><div class="nombre">Statico Rígido</div><div class="precio-lista">$40.500</div><div class="precio-efectivo">$34.500</div></div>
+<div class="producto"><div class="nombre">Creep M Rígido</div><div class="precio-lista">$45.500</div><div class="precio-efectivo">$38.500</div></div>
+</div>
+</div>
+
+<div id="j-semi" class="oculto">
+<button class="btn-volver" onclick="ir('jeans')">← Volver</button>
+<h2 class="titulo">SEMICLÁSICOS</h2>
+<div class="productos">
+<div class="producto"><div class="nombre">Sounds (Loose)</div><div class="precio-lista">$42.500</div><div class="precio-efectivo">$36.000</div></div>
+<div class="producto"><div class="nombre">Rígido P</div><div class="precio-lista">$42.500</div><div class="precio-efectivo">$36.000</div></div>
+<div class="producto"><div class="nombre">Rígido L</div><div class="precio-lista">$42.500</div><div class="precio-efectivo">$36.000</div></div>
+<div class="producto"><div class="nombre">Hamm</div><div class="precio-lista">$45.500</div><div class="precio-efectivo">$38.500</div></div>
+<div class="producto"><div class="nombre">Recto Mark</div><div class="precio-lista">$52.000</div><div class="precio-efectivo">$44.000</div></div>
+</div>
+</div>
+
+<div id="j-clas" class="oculto">
+<button class="btn-volver" onclick="ir('jeans')">← Volver</button>
+<h2 class="titulo">CLÁSICOS</h2>
+<div class="productos">
+<div class="producto"><div class="nombre">Baggy Cardiff</div><div class="precio-lista">$52.000</div><div class="precio-efectivo">$44.000</div></div>
+<div class="producto"><div class="nombre">Recto Gourmand Blue</div><div class="precio-lista">$52.000</div><div class="precio-efectivo">$44.000</div></div>
+<div class="producto"><div class="nombre">Relaxed Mitte</div><div class="precio-lista">$52.000</div><div class="precio-efectivo">$44.000</div></div>
+<div class="producto"><div class="nombre">Statico Cranston</div><div class="precio-lista">$52.000</div><div class="precio-efectivo">$44.000</div></div>
+</div>
+</div>
+
+<div id="j-bag" class="oculto">
+<button class="btn-volver" onclick="ir('jeans')">← Volver</button>
+<h2 class="titulo">BAGGYS</h2>
+<div class="productos">
+<div class="producto"><div class="nombre">Baggui Recto P</div><div class="precio-lista">$42.500</div><div class="precio-efectivo">$36.000</div></div>
+<div class="producto"><div class="nombre">Baggui L</div><div class="precio-lista">$42.500</div><div class="precio-efectivo">$36.000</div></div>
+<div class="producto"><div class="nombre">Relaxed</div><div class="precio-lista">$57.000</div><div class="precio-efectivo">$48.500</div></div>
+<div class="producto"><div class="nombre">Baggys</div><div class="precio-lista">$57.000</div><div class="precio-efectivo">$48.500</div></div>
+</div>
+</div>
+
+<div id="j-car" class="oculto">
+<button class="btn-volver" onclick="ir('jeans')">← Volver</button>
+<h2 class="titulo">CARGOS</h2>
+<div class="productos">
+<div class="producto"><div class="nombre">Cargo Baggy Harley</div><div class="precio-lista">$45.500</div><div class="precio-efectivo">$38.500</div></div>
+<div class="producto"><div class="nombre">Cargo Recto Black</div><div class="precio-lista">$45.500</div><div class="precio-efectivo">$38.500</div></div>
+<div class="producto"><div class="nombre">Cargo Localizado</div><div class="precio-lista">$45.500</div><div class="precio-efectivo">$38.500</div></div>
+<div class="producto"><div class="nombre">Jogger First</div><div class="precio-lista">$51.000</div><div class="precio-efectivo">$43.500</div></div>
+</div>
+</div>
+
+<div id="j-ofer" class="oculto">
+  <button class="btn-volver" onclick="ir('jeans')">← Volver</button>
+  <h2 class="titulo">OFERTAS JEANS</h2>
+
+  <div class="productos">
+
+    <div class="producto">
+      <div class="badge">OFERTA</div>
+      <div class="nombre">Oferta 1</div>
+      <div class="precio-lista">1 x $17.000</div>
+      <div class="precio-efectivo">2 x $25.500</div>
+    </div>
+
+    <div class="producto">
+      <div class="badge">OFERTA</div>
+      <div class="nombre">Oferta 2</div>
+      <div class="precio-lista">1 x $26.000</div>
+      <div class="precio-efectivo">2 x $39.000</div>
+    </div>
+
+  </div>
+</div>
+
+<div id="j-camps" class="oculto">
+<button class="btn-volver" onclick="ir('jeans')">← Volver</button>
+<h2 class="titulo">Camperas</h2>
+<div class="productos">
+<div class="producto"><div class="nombre">Camp Jeans #Bellie#</div><div class="precio-lista">$65.500</div><div class="precio-efectivo">$55.500</div></div>
+<div class="producto"><div class="nombre">Camp Jeans Adulto</div><div class="precio-lista">$60.000</div><div class="precio-efectivo">$51.000</div></div>
+<div class="producto"><div class="nombre">Camp JNS Denim#</div><div class="precio-lista">$55.000</div><div class="precio-efectivo">$47.500</div></div>
+</div>
+</div>
+
+<div id="bermudas" class="oculto">
+<button class="btn-volver" onclick="ir('inicio')">← Volver</button>
+<h2 class="titulo">BERMUDAS</h2>
+<div class="productos">
+<div class="producto sub" onclick="ir('berm-clasicas')"><div class="nombre">Clásicas →</div></div>
+<div class="producto sub" onclick="ir('berm-baggys')"><div class="nombre">Baggys →</div></div>
+<div class="producto sub" onclick="ir('berm-chino-spandex')"><div class="nombre">Chino Spandex →</div></div>
+<div class="producto sub" onclick="ir('berm-flecos')"><div class="nombre">Flecos →</div></div>
+<div class="producto sub" onclick="ir('berm-kargo')"><div class="nombre">Kargo →</div></div>
+<div class="producto sub" onclick="ir('berm-ofertas')"><div class="badge">OFERTA</div><div class="nombre">Ofertas →</div></div>
+</div>
+</div>
+
+<div id="berm-clasicas" class="oculto">
+<button class="btn-volver" onclick="ir('bermudas')">← Volver</button>
+<h2 class="titulo">BERMUDAS CLÁSICAS</h2>
+<div class="productos">
+<div class="producto"><div class="nombre">Berm. JNS Básica Rígida</div><div class="precio-lista">$45.000</div><div class="precio-efectivo">$38.500</div></div>
+<div class="producto"><div class="nombre">Berm. JNS Tresor</div><div class="precio-lista">$49.000</div><div class="precio-efectivo">$41.500</div></div>
+<div class="producto"><div class="nombre">Berm. Basic Gen</div><div class="precio-lista">$45.000</div><div class="precio-efectivo">$38.500</div></div>
+<div class="producto"><div class="nombre">Berm. JNS Woods (E) 5661</div><div class="precio-lista">$52.000</div><div class="precio-efectivo">$44.000</div></div>
+<div class="producto"><div class="nombre">Berm. JNS Homen 5357 (E)</div><div class="precio-lista">$52.000</div><div class="precio-efectivo">$44.000</div></div>
+</div>
+</div>
+
+<div id="berm-baggys" class="oculto">
+<button class="btn-volver" onclick="ir('bermudas')">← Volver</button>
+<h2 class="titulo">BERMUDAS BAGGYS</h2>
+<div class="productos">
+<div class="producto"><div class="nombre">Berm. Baggy Blue</div><div class="precio-lista">$49.000</div><div class="precio-efectivo">$41.500</div></div>
+<div class="producto"><div class="nombre">Berm. Baggy Black</div><div class="precio-lista">$49.000</div><div class="precio-efectivo">$41.500</div></div>
+</div>
+</div>
+
+<div id="berm-chino-spandex" class="oculto">
+<button class="btn-volver" onclick="ir('bermudas')">← Volver</button>
+<h2 class="titulo">BERMUDAS CHINO SPANDEX</h2>
+<div class="productos">
+<div class="producto"><div class="nombre">Berm. Chino Spandex</div><div class="precio-lista">$45.000</div><div class="precio-efectivo">$38.500</div></div>
+</div>
+</div>
+
+<div id="berm-kargo" class="oculto">
+<button class="btn-volver" onclick="ir('bermudas')">← Volver</button>
+<h2 class="titulo">BERMUDAS KARGO</h2>
+<div class="productos">
+<div class="producto"><div class="nombre">Berm. JNS Bols Fuelle</div><div class="precio-lista">$52.000</div><div class="precio-efectivo">$44.000</div></div>
+<div class="producto"><div class="nombre">Berm. JNS Kargo Black</div><div class="precio-lista">$49.000</div><div class="precio-efectivo">$41.500</div></div>
+<div class="producto"><div class="nombre">Berm. Jogger Cargo Spandex</div><div class="precio-lista">$53.000</div><div class="precio-efectivo">$45.000</div></div>
+</div>
+</div>
+
+<div id="berm-flecos" class="oculto">
+<button class="btn-volver" onclick="ir('bermudas')">← Volver </button>
+<h2 class="titulo">BERMUDAS FLECOS</h2>
+<div class="productos">
+<div class="producto"><div class="nombre">Berm. Carpintero con Flecos</div><div class="precio-lista">$45.000</div><div class="precio-efectivo">$38.500</div></div>
+<div class="producto"><div class="nombre">Berm. Kargo con Flecos</div><div class="precio-lista">$45.000</div><div class="precio-efectivo">$38.500</div></div>
+</div>
+</div>
+
+<div id="berm-ofertas" class="oculto">
+<button class="btn-volver" onclick="ir('bermudas')">← Volver</button>
+<h2 class="titulo">OFERTAS BERMUDAS</h2>
+<h3 class="titulo-oferta">1 unidad $20.000 | 2 unidades $30.000</h3>
+<div class="productos">
+<div class="producto"><div class="badge">OFERTA</div><div class="nombre">Berm. Oferta Modelo 1</div><div class="precio-efectivo">2x $30.000</div></div>
+</div>
+</div>
+
+<div id="lino" class="oculto">
+<button class="btn-volver" onclick="ir('inicio')">← Volver</button>
+<h2 class="titulo">LINO</h2>
+<div class="productos">
+<div class="producto sub" onclick="ir('lino-camisas')"><div class="nombre">Camisas →</div></div>
+<div class="producto sub" onclick="ir('lino-pantalones')"><div class="nombre">Pantalones →</div></div>
+<div class="producto sub" onclick="ir('lino-bermudas')"><div class="nombre">Bermudas →</div></div>
+<div class="producto sub" onclick="ir('lino-conjuntos')"><div class="nombre">Conjuntos →</div></div>
+</div>
+</div>
+
+<div id="lino-camisas" class="oculto">
+<button class="btn-volver" onclick="ir('lino')">← Volver</button>
+<h2 class="titulo">CAMISAS LINO</h2>
+<div class="productos">
+<div class="producto"><div class="nombre">Camisa Lino M/C (K)</div><div class="precio-lista">$47.000</div><div class="precio-efectivo">$40.000</div></div>
+<div class="producto"><div class="nombre">Cam. Lino M/C RAY (JL)</div><div class="precio-lista">$47.000</div><div class="precio-efectivo">$40.000</div></div>
+<div class="producto"><div class="nombre">Camisa Lino M/C (BASIC)</div><div class="precio-lista">$54.000</div><div class="precio-efectivo">$46.000</div></div>
+<div class="producto"><div class="nombre">Cam. Lino M/L</div><div class="precio-lista">$57.000</div><div class="precio-efectivo">$48.500</div></div>
+<div class="producto"><div class="nombre">Cam. Lino M/L (BOT)</div><div class="precio-lista">$57.000</div><div class="precio-efectivo">$48.500</div></div>
+</div>
+</div>
+
+<div id="lino-pantalones" class="oculto">
+<button class="btn-volver" onclick="ir('lino')">← Volver</button>
+<h2 class="titulo">PANTALONES LINO</h2>
+<div class="productos">
+<div class="producto"><div class="nombre">Pant. Jogger Lino</div><div class="precio-lista">$57.000</div><div class="precio-efectivo">$48.500</div></div>
+<div class="producto"><div class="nombre">Pant. Jogger Lino Spandex</div><div class="precio-lista">$57.000</div><div class="precio-efectivo">$48.500</div></div>
+<div class="producto"><div class="nombre">Pant. Chino Lino Spandex</div><div class="precio-lista">$57.000</div><div class="precio-efectivo">$48.500</div></div>
+</div>
+</div>
+
+<div id="lino-bermudas" class="oculto">
+<button class="btn-volver" onclick="ir('lino')">← Volver</button>
+<h2 class="titulo">BERMUDAS LINO</h2>
+<div class="productos">
+<div class="producto"><div class="nombre">Berm. Chino Lino</div><div class="precio-lista">$47.000</div><div class="precio-efectivo">$40.000</div></div>
+<div class="producto"><div class="nombre">Berm. Jogger Lino</div><div class="precio-lista">$47.000</div><div class="precio-efectivo">$40.000</div></div>
+<div class="producto"><div class="nombre">Berm. Chino Lino Spandex</div><div class="precio-lista">$47.000</div><div class="precio-efectivo">$40.000</div></div>
+<div class="producto"><div class="nombre">Berm. Chino Lino Spandex 2</div><div class="precio-lista">$47.000</div><div class="precio-efectivo">$40.000</div></div>
+</div>
+</div>
+
+<div id="lino-conjuntos" class="oculto">
+<button class="btn-volver" onclick="ir('lino')">← Volver</button>
+<h2 class="titulo">CONJUNTOS LINO</h2>
+<div class="productos">
+<div class="producto"><div class="nombre">Set Lino Cam 2 Bols</div><div class="precio-lista">$80.000</div><div class="precio-efectivo">$68.000</div></div>
+</div>
+</div>
+
+<div id="gabardina" class="oculto">
+  <button class="btn-volver" onclick="ir('inicio')">← Volver</button>
+  <h2 class="titulo">GABARDINA</h2>
+  <div class="productos">
+    <div class="producto sub" onclick="ir('gab-chinos')"><div class="nombre">Pantalones Chinos →</div></div>
+    <div class="producto sub" onclick="ir('gab-kargo')"><div class="nombre">Kargo →</div></div>
+    <div class="producto sub" onclick="ir('gab-carpintero')"><div class="nombre">Carpintero →</div></div>
+    <div class="producto sub" onclick="ir('gab-camisaco')"><div class="nombre">Camisaco →</div></div>
+  </div>
+</div>
+
+<div id="gab-chinos" class="oculto">
+  <button class="btn-volver" onclick="ir('gabardina')">← Volver</button>
+  <h2 class="titulo">Pantalones chinos</h2>
+  <div class="productos">
+    <div class="producto"><div class="nombre">Pant.Chino Color</div><div class="precio-lista">$42.500</div><div class="precio-efectivo">$36.000</div></div>
+    <div class="producto"><div class="nombre">Pant.Chino Negro </div><div class="precio-lista">$42.500</div><div class="precio-efectivo">$36.000</div></div>
+  </div>
+</div>
+
+<div id="gab-kargo" class="oculto">
+  <button class="btn-volver" onclick="ir('gabardina')">← Volver</button>
+  <h2 class="titulo">Kargo</h2>
+  <div class="productos">
+    <div class="producto"><div class="nombre">Pant Gab kargo </div><div class="precio-lista">$42.500</div><div class="precio-efectivo">$36.000</div></div>
+    <div class="producto"><div class="nombre">Kargo Depo Puño</div><div class="precio-lista">$45.500</div><div class="precio-efectivo">$38.500</div></div>
+    <div class="producto"><div class="nombre">Kargo Depo Sin Puño </div><div class="precio-lista">$45.500</div><div class="precio-efectivo">$38.500</div></div>
+    <div class="producto"><div class="nombre">Jogger #Con Puños#</div><div class="precio-lista">$59.500</div><div class="precio-efectivo">$50.500</div></div>
+    <div class="producto"><div class="nombre">Jogger #Sin Puños# </div><div class="precio-lista">$59.500</div><div class="precio-efectivo">$50.500</div></div>
+  </div>
+</div>
+
+<div id="gab-carpintero" class="oculto">
+  <button class="btn-volver" onclick="ir('gabardina')">← Volver</button>
+  <h2 class="titulo">Carpintero</h2>
+  <div class="productos">
+    <div class="producto"><div class="nombre">Carpintero Gabardina (E)</div><div class="precio-lista">$39.000</div><div class="precio-efectivo">$33.000</div></div>
+  </div>
+</div>
+
+<div id="gab-camisaco" class="oculto">
+  <button class="btn-volver" onclick="ir('gabardina')">← Volver</button>
+  <h2 class="titulo">Camisaco</h2>
+  <div class="productos">
+    <div class="producto"><div class="nombre">Camisaco Gab</div><div class="precio-lista">$58.000</div><div class="precio-efectivo">$49.500</div></div>
+  </div>
+</div>
+</div>
+
+<div id="chombas" class="oculto">
+    <button class="btn-volver" onclick="ir('inicio')">← Volver</button>
+    <h2 class="titulo">CHOMBAS</h2>
+    <div class="productos">
+        <div class="producto sub" onclick="ir('chomb-alg')"><div class="nombre">Chomba Algodon →</div></div>
+        <div class="producto sub" onclick="ir('chomb-pique')"><div class="nombre">Chomba Pique →</div></div>
+        <div class="producto sub" onclick="ir('chomb-import')"><div class="nombre">Chombas Importadas →</div></div>
+        <div class="producto sub" onclick="ir('chomb-ofert')"><div class="nombre">Chombas Oferta →</div></div>
+    </div>
+</div>
+
+<div id="chomb-alg" class="oculto">
+  <button class="btn-volver" onclick="ir('chombas')">← Volver</button>
+  <h2 class="titulo">Chomba Algodon</h2>
+  <div class="productos">
+    <div class="producto"><div class="nombre">Jersey (k) </div><div class="precio-lista">27.000</div><div class="precio-efectivo">$23.000</div></div>
+    <div class="producto"><div class="nombre">Chomba Algodon </div><div class="precio-lista">$27.000</div><div class="precio-efectivo">$23.000</div></div>
+<div class="producto"><div class="nombre">Chomba Especial (5420 E) </div><div class="precio-lista">$30.000</div><div class="precio-efectivo">$25.500</div></div>
+  </div>
+</div>
+
+<div id="chomb-pique" class="oculto">
+  <button class="btn-volver" onclick="ir('chombas')">← Volver</button>
+  <h2 class="titulo">Chomba Pique</h2>
+  <div class="productos">
+    <div class="producto"><div class="nombre">Chomba Pique (k) </div><div class="precio-lista">27.000</div><div class="precio-efectivo">$23.000</div></div>
+    <div class="producto"><div class="nombre">Chomba pique vivo k 5457 </div><div class="precio-lista">$27.000</div><div class="precio-efectivo">$23.000</div></div>
+  </div>
+</div>
+
+
+<div id="chomb-import" class="oculto">
+  <button class="btn-volver" onclick="ir('chombas')">← Volver</button>
+  <h2 class="titulo">Chomba Importada</h2>
+  <div class="productos">
+    <div class="producto"><div class="nombre">Chomba Tejida (k)</div><div class="precio-lista">30.000</div><div class="precio-efectivo">$25.500</div></div>
+    <div class="producto"><div class="nombre">Chomba Tejida Tramada (k)</div><div class="precio-lista">$30.000</div><div class="precio-efectivo">$25.500</div></div>
+<div class="producto"><div class="nombre">Chomba Wafle</div><div class="precio-lista">30.000</div><div class="precio-efectivo">$25.500</div></div>
+    <div class="producto"><div class="nombre">Chomba Pique C/cie </div><div class="precio-lista">$30.000</div><div class="precio-efectivo">$25.500</div></div>
+<div class="producto"><div class="nombre">Chomba Alg Spandex </div><div class="precio-lista">$30.000</div><div class="precio-efectivo">$25.500</div></div>
+</div>
+</div>
+<div id="chomb-ofert" class="oculto">
+<button class="btn-volver" onclick="ir('chombas')">← Volver</button>
+<h2 class="titulo">Chomba oferta </h2>
+<div class="productos">
+<div class="producto"><div class="nombre">Chombaa Logo</div><div class="precio-lista">$22.500</div><div class="precio-efectivo">$19.000</div></div>
+</div>
+</div>
+
+<div id="camisas" class="oculto">
+    <button class="btn-volver" onclick="ir('inicio')">← Volver</button>
+    <h2 class="titulo">CAMISAS</h2>
+    <div class="productos">
+        <div class="producto sub" onclick="ir('cam-lisas')"><div class="nombre">Camisa Elastizada →</div></div>
+        <div class="producto sub" onclick="ir('cam-estamp')"><div class="nombre">Camisa Estampada →</div></div>
+    </div>
+</div>
+
+<div id="cam-lisas" class="oculto">
+  <button class="btn-volver" onclick="ir('camisas')">← Volver</button>
+  <h2 class="titulo">Camisas Lisas</h2>
+  <div class="productos">
+    <div class="producto"><div class="nombre">Camisa Lisa Elastizada</div><div class="precio-lista">$42.500</div><div class="precio-efectivo">$36.000</div></div>
+    <div class="producto"><div class="nombre">Camisa Lisa JL</div><div class="precio-lista">$42.000</div><div class="precio-efectivo">$36.000</div></div>
+    <div class="producto"><div class="nombre">Camisa Lisa News (E)</div><div class="precio-lista">$45.000</div><div class="precio-efectivo">$38.500</div></div>
+  </div>
+</div>
+<div id="cam-estamp" class="oculto">
+  <button class="btn-volver" onclick="ir('camisas')">← Volver</button>
+  <h2 class="titulo">Camisas Estampadas</h2>
+  <div class="productos">
+    <div class="producto">
+        <div class="badge">OFERTA</div>
+        <div class="nombre">Camisa M/L Est Elastizada</div>
+        <div class="precio-lista">1 X $17.000</div>
+        <div class="precio-efectivo">2 X $25.500</div>
+    </div>
+    <div class="producto">
+        <div class="nombre">Camisa m/l Poplin</div>
+        <div class="precio-lista">$45.000</div>
+        <div class="precio-efectivo">$38.500</div>
+    </div>
+    <div class="producto">
+        <div class="nombre">Camisa Est JL</div>
+        <div class="precio-lista">$17.000</div>
+        <div class="precio-efectivo">$14.500</div>
+    </div>
+  </div>
+</div>
+
+<div id="sweaters" class="oculto">
+    <button class="btn-volver" onclick="ir('inicio')">← Volver</button>
+    <br>
+    <h2 class="titulo">SWEATERS</h2>
+    <div class="productos">
+        <div class="producto sub" onclick="ir('sw-elas')"><div class="nombre">Sweaters elastizados →</div></div>
+        <div class="producto sub" onclick="ir('sw-clasic')"><div class="nombre">Sweater Clásico →</div></div> <div class="producto sub" onclick="ir('sw-ofert')"><div class="nombre">Sweater Oferta →</div></div>
+    </div>
+</div>
+
+<div id="sw-elas" class="oculto">
+    <button class="btn-volver" onclick="ir('sweaters')">← Volver</button>
+    <br>
+    <h2 class="titulo">Sweaters Elastizados</h2>
+    <div class="productos">
+        <div class="producto">
+            <div class="nombre">Sweater CR. Elastizado</div>
+            <div class="precio-lista">$29.000</div>
+            <div class="precio-efectivo">$24.500</div>
+        </div>
+    </div>
+</div>
+
+<div id="sw-clasic" class="oculto"> <button class="btn-volver" onclick="ir('sweaters')">← Volver</button>
+    <br>
+    <h2 class="titulo">Sweater Clásico</h2>
+    <div class="productos">
+        <div class="producto">
+            <div class="nombre">SweaterClásico</div>
+            <div class="precio-lista">$38.000</div>
+            <div class="precio-efectivo">$32.500</div>
+        </div>
+    </div>
+</div>
+
+<div id="sw-ofert" class="oculto">
+    <button class="btn-volver" onclick="ir('sweaters')">← Volver</button>
+    <br>
+    <h2 class="titulo">Sweater Oferta</h2>
+    <div class="productos">
+        <div class="producto">
+            <div class="nombre">Sweater Rayas</div>
+            <div class="precio-lista">$25.000</div>
+            <div class="precio-efectivo">$19.000</div>
+        </div>
+    </div>
+</div>
+
+<div id="buzos" class="oculto">
+    <button class="btn-volver" onclick="ir('inicio')">← Volver</button>
+    <h2 class="titulo">BUZOS</h2>
+    <div class="productos">
+        <div class="producto sub" onclick="ir('buz-rust')"><div class="nombre">Buzos Rusticos →</div></div>
+        <div class="producto sub" onclick="ir('buz-ofert')"><div class="nombre">Buzos oferta →</div></div>
+        <div class="producto sub" onclick="ir('camp-rust')"><div class="nombre">Camperas rusticas →</div></div>
+    </div>
+</div>
+
+<div id="buz-rust" class="oculto">
+    <button class="btn-volver" onclick="ir('buzos')">← Volver</button>
+    <h2 class="titulo">Buzos Rústicos</h2>
+    <div class="productos">
+        <div class="producto">
+            <div class="nombre">Buzos Over rústicos</div>
+            <div class="precio-lista">$47.000</div>
+            <div class="precio-efectivo">$40.000</div>
+        </div>
+        <div class="producto">
+            <div class="nombre">Buzo rust 1/2 cierre</div>
+            <div class="precio-lista">$29.000</div>
+            <div class="precio-efectivo">$24.500</div>
+        </div>
+    </div>
+</div>
+
+<div id="buz-ofert" class="oculto">
+    <button class="btn-volver" onclick="ir('buzos')">← Volver</button>
+    <h2 class="titulo">Buzos Oferta</h2>
+    <div class="productos">
+        <div class="producto">
+            <div class="nombre">Buzo Oferta</div>
+            <div class="precio-lista">$25.000</div>
+            <div class="precio-efectivo">$20.000</div>
+        </div>
+    </div>
+</div>
+
+<div id="camp-rust" class="oculto">
+    <button class="btn-volver" onclick="ir('buzos')">← Volver</button>
+    <h2 class="titulo">Camperas Rústicas</h2>
+    <div class="productos">
+        <div class="producto">
+            <div class="nombre">Campera rústica</div>
+            <div class="precio-lista">$50.000</div>
+            <div class="precio-efectivo">$42.500</div>
+        </div>
+    </div>
+</div>
+
+<div id="accesorios" class="oculto">
+    <button class="btn-volver" onclick="ir('inicio')">← Volver</button>
+    <h2 class="titulo">ACCESORIOS</h2>
+    <div class="productos">
+        <div class="producto sub" onclick="ir('a-cint')"><div class="nombre">Cintos Cuero →</div></div>
+        <div class="producto sub" onclick="ir('a-bill')"><div class="nombre">Billeteras →</div></div>
+        <div class="producto sub" onclick="ir('a-gor')"><div class="nombre">Gorras →</div></div>
+        <div class="producto sub" onclick="ir('a-riñ')"><div class="nombre">Riñoneras →</div></div>
+    </div>
+</div>
+
+      <div id="a-cint" class="oculto">
+<button class="btn-volver" onclick="ir('accesorios')">← Volver</button>
+<h2 class="titulo">Cintos Cuero </h2>
+<div class="productos">
+<div class="producto"><div class="nombre">Cintos Cuero</div><div class="precio-lista">$20.000</div><div class="precio-efectivo">$17.000</div></div>
+</div>
+</div>
+
+      <div id="a-bill" class="oculto">
+<button class="btn-volver" onclick="ir('accesorios')">← Volver</button>
+<h2 class="titulo">Billeteras </h2>
+<div class="productos">
+<div class="producto"><div class="nombre">Billeteras Depo</div><div class="precio-lista">$27.500</div><div class="precio-efectivo">$23.500</div></div>
+</div>
+</div>
+
+     <div id="a-gor" class="oculto">
+<button class="btn-volver" onclick="ir('accesorios')">← Volver</button>
+<h2 class="titulo">Gorras </h2>
+<div class="productos">
+<div class="producto"><div class="nombre">Caps Depo Truck </div><div class="precio-lista">27.000</div><div class="precio-efectivo">$23.000</div></div>
+    <div class="producto"><div class="nombre">Caps N</div><div class="precio-lista">$24.000</div><div class="precio-efectivo">$20.500</div></div>
+  <div class="producto"><div class="nombre">Sombrero Australiano  </div><div class="precio-lista">27.000</div><div class="precio-efectivo">$23.000</div></div>
+</div>
+</div>
+
+    <div id="a-riñ" class="oculto">
+<button class="btn-volver" onclick="ir('accesorios')">← Volver</button>
+<h2 class="titulo">Riñoneras </h2>
+<div class="productos">
+<div class="producto"><div class="nombre">Riñonera</div><div class="precio-lista">20.500</div><div class="precio-efectivo">$17.500</div></div>
+    <div class="producto"><div class="nombre">Riñonera 17</div><div class="precio-lista">$24.000</div><div class="precio-efectivo">$20.500</div></div>
+<div class="producto"><div class="nombre">Riñonera 01 </div><div class="precio-lista">28.000</div><div class="precio-efectivo">$24.000</div></div>
+    <div class="producto"><div class="nombre">Riñonera 07 </div><div class="precio-lista">$29.000</div><div class="precio-efectivo">$24.500</div></div>
+<div class="producto"><div class="nombre">Riñonera 03</div><div class="precio-lista">$32.000</div><div class="precio-efectivo">$27.000</div></div>
+ <div class="producto"><div class="nombre">Riñonera 08 </div><div class="precio-lista">$32.000</div><div class="precio-efectivo">$27.000</div></div>
+<div class="producto">
+    <div class="nombre">Riñonera 12</div>
+    <div class="precio-lista">$36.000</div>
+    <div class="precio-efectivo">$30.500</div>
+</div>
+
+
+</div> <footer>
+  <p style="color:white;font-size:18px">DEPO JEANS</p>
+  <p>&copy; 2026</p>
+</footer>
+<script>
+function ir(seccion) {
+  var todasLasSecciones = [
+    'inicio', 'remeras', 'r-over', 'r-imp',
+    'jeans', 'j-ela', 'j-mom', 'j-semi', 'j-clas', 'j-bag', 'j-car', 'j-ofer', 'j-camps',
+    'lino', 'lino-camisas', 'lino-pantalones', 'lino-bermudas', 'lino-conjuntos',
+    'bermudas', 'berm-clasicas', 'berm-baggys', 'berm-chino-spandex', 'berm-kargo', 'berm-flecos', 'berm-ofertas',
+    'gabardina', 'gab-chinos', 'gab-kargo', 'gab-carpintero', 'gab-camisaco',
+    'chombas', 'chomb-alg', 'chomb-pique','chomb-import', 'chomb-ofert',
+    'camisas', 'cam-lisas', 'cam-estamp',
+    'sweaters', 'sw-elas', 'sw-clasic', 'sw-ofert', // ACTUALIZADO sw-clasic
+    'buzos', 'buz-rust', 'buz-ofert', 'camp-rust',
+    'accesorios', 'a-cint', 'a-bill', 'a-gor', 'a-riñ'
+  ];
+
+  for (var i = 0; i < todasLasSecciones.length; i++) {
+    var seccionActual = document.getElementById(todasLasSecciones[i]);
+    if (seccionActual) {
+      seccionActual.className = 'oculto';
+    }
+  }
+
+  var destino = document.getElementById(seccion);
+  if (destino) {
+    destino.className = '';
+  }
+  window.scrollTo(0, 0);
+}
+</script>
+
+</body>
+</html>
