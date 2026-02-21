@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Depo Jeans</title>
 <style>
+/*
+  ====== BLOQUE DE ESTILOS (CSS) ======
+  Define la estética general del sitio: colores, layout, componentes y responsive.
+*/
 :root {
     --bg: #0b0d12;
     --surface: #131722;
@@ -385,6 +389,7 @@ footer {
 </head>
 <body>
 
+<!-- ====== HERO / PORTADA ====== -->
 <header>
 <div class="logo">DEPO JEANS</div>
 <p class="hero-subtitle">Berazategui · Quilmes · Lomas · Solano · Flores</p>
@@ -393,6 +398,7 @@ footer {
 <a class="hero-cta" href="https://www.instagram.com/depojeans/" target="_blank" rel="noopener">Ver editorial en Instagram</a>
 </header>
 
+<!-- ====== NAVEGACIÓN PRINCIPAL ====== -->
 <nav>
 <div class="menu">
 <button onclick="ir('inicio')">INICIO</button>
@@ -409,6 +415,7 @@ footer {
 </div>
 </nav>
 
+<!-- ====== CONTENIDO PRINCIPAL Y CATÁLOGO ====== -->
 <div class="container">
 
 <div id="inicio">
@@ -1056,6 +1063,7 @@ footer {
 </div> 
 </div>
 
+<!-- ====== CHAT DE PREGUNTAS FRECUENTES ====== -->
 <div class="chat-widget">
   <button class="chat-toggle" onclick="abrirChat()">💬 Asesor virtual Depo Jeans</button>
   <div id="chatBox" class="chat-box oculto">
@@ -1076,6 +1084,7 @@ footer {
   <p>&copy; 2026</p>
 </footer>
 <script>
+// ====== LÓGICA DE NAVEGACIÓN ENTRE SECCIONES ======
 function ir(seccion) {
   var todasLasSecciones = [
     'inicio', 'remeras', 'r-over', 'r-imp',
@@ -1104,6 +1113,7 @@ function ir(seccion) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+// ====== RESPUESTAS PREDEFINIDAS DEL CHAT ======
 var mensajesChat = {
   horarios: '🕐 Lunes a sábado de 9:00 a 20:00 hs en todas las sucursales.',
   pagos: '💳 Efectivo 15% OFF, débito precio de lista, crédito bancaria 3 cuotas sin interés y financiera en 3 cuotas con recargo.',
@@ -1112,16 +1122,19 @@ var mensajesChat = {
   mayorista: '📦 Para mayorista escribinos al +54 11 3845-4255 y te enviamos catálogo actualizado.'
 };
 
+// Muestra u oculta la ventana del chat.
 function abrirChat() {
   var box = document.getElementById('chatBox');
   box.classList.toggle('oculto');
 }
 
+// Escribe en pantalla la respuesta según la consulta elegida.
 function responderChat(clave) {
   var log = document.getElementById('chatLog');
   log.textContent = mensajesChat[clave] || 'En breve te responde un asesor.';
 }
 
+// ====== ROTADOR DE MENSAJES "ACTIVO AHORA" ======
 var mensajesActivos = [
   '🔥 Activo ahora: Promo 2x1 en remeras seleccionadas + asesoría por WhatsApp en menos de 5 minutos.',
   '🚚 Activo ahora: Reservá online y retirás en sucursal el mismo día.',
