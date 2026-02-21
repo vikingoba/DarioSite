@@ -261,6 +261,116 @@ nav {
     margin-bottom: 8px;
 }
 
+
+
+.section-shell {
+    animation: sectionFade 0.5s ease;
+}
+
+@keyframes sectionFade {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-cta {
+    box-shadow: 0 0 0 rgba(215, 38, 61, 0.45);
+    animation: pulse 2.4s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(215, 38, 61, 0.45); }
+    70% { box-shadow: 0 0 0 18px rgba(215, 38, 61, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(215, 38, 61, 0); }
+}
+
+.live-strip {
+    margin: 18px 0 30px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 18px;
+    background: linear-gradient(120deg, rgba(125, 255, 168, 0.08), rgba(215, 38, 61, 0.08));
+}
+
+.live-strip p { color: #dce3f4; }
+
+.live-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+}
+
+.live-actions button {
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.04);
+    color: var(--text);
+    border-radius: 999px;
+    padding: 8px 14px;
+    cursor: pointer;
+}
+
+.sub-thumb {
+    width: calc(100% + 44px);
+    margin: -22px -22px 12px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 14px 14px 0 0;
+    display: block;
+    opacity: 0.9;
+}
+
+.sub:hover .sub-thumb { opacity: 1; }
+
+.chat-widget {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    width: min(360px, calc(100vw - 26px));
+    z-index: 50;
+}
+
+.chat-toggle {
+    width: 100%;
+    border: none;
+    border-radius: 999px;
+    padding: 12px 16px;
+    font-weight: 700;
+    cursor: pointer;
+    background: linear-gradient(90deg, #d7263d, #f45b69);
+    color: white;
+}
+
+.chat-box {
+    margin-top: 10px;
+    background: #101521;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 16px;
+}
+
+.chat-box h4 { margin-bottom: 8px; }
+.chat-log {
+    min-height: 60px;
+    color: #d9e1f4;
+    margin-bottom: 12px;
+    font-size: 0.93rem;
+}
+
+.chat-qs {
+    display: grid;
+    gap: 8px;
+}
+
+.chat-qs button {
+    text-align: left;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.04);
+    color: #e4eaf8;
+    padding: 9px 10px;
+    cursor: pointer;
+}
+
 footer {
     background-color: #0a0d14;
     text-align: center;
@@ -313,6 +423,15 @@ footer {
 <article style="background-image:url('https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=80');"><span>Essentials Premium</span></article>
 </section>
 
+<div class="live-strip">
+<p id="liveText">🔥 Activo ahora: Promo 2x1 en remeras seleccionadas + asesoría por WhatsApp en menos de 5 minutos.</p>
+<div class="live-actions">
+<button onclick="ir('remeras')">Ver remeras</button>
+<button onclick="ir('jeans')">Explorar jeans</button>
+<button onclick="abrirChat()">Consultar stock</button>
+</div>
+</div>
+
 <div class="info-grid">
 <div class="card">
 <h3>💳 Medios de Pago</h3>
@@ -354,8 +473,8 @@ footer {
 <div class="productos">
 <div class="producto"><div class="nombre">Remera Lisa</div><div class="precio-lista">$19.000</div><div class="precio-efectivo">$16.000</div></div>
 <div class="producto"><div class="nombre">Slim Fit</div><div class="precio-lista">$21.500</div><div class="precio-efectivo">$18.500</div></div>
-<div class="producto sub" onclick="ir('r-over')"><div class="nombre">Oversize →</div></div>
-<div class="producto sub" onclick="ir('r-imp')"><div class="nombre">Importadas →</div></div>
+<div class="producto sub" onclick="ir('r-over')"><img class="sub-thumb" src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=80" alt="Remeras oversize"><div class="nombre">Oversize →</div></div>
+<div class="producto sub" onclick="ir('r-imp')"><img class="sub-thumb" src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=900&q=80" alt="Remeras importadas"><div class="nombre">Importadas →</div></div>
 <div class="producto"><div class="badge">OFERTA</div><div class="nombre">Remera Oferta</div><div class="precio-lista">$16.000</div><div class="precio-efectivo">$13.500</div></div>
 </div>
 </div>
@@ -404,11 +523,11 @@ footer {
 <button class="btn-volver" onclick="ir('inicio')">← Volver</button>
 <h2 class="titulo">JEANS</h2>
 <div class="productos">
-<div class="producto sub" onclick="ir('j-ela')"><div class="nombre">Elastizados →</div></div>
-<div class="producto sub" onclick="ir('j-mom')"><div class="nombre">Mom →</div></div>
+<div class="producto sub" onclick="ir('j-ela')"><img class="sub-thumb" src="https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=900&q=80" alt="Jeans elastizados"><div class="nombre">Elastizados →</div></div>
+<div class="producto sub" onclick="ir('j-mom')"><img class="sub-thumb" src="https://images.unsplash.com/photo-1473966968600-fa801b869a1a?auto=format&fit=crop&w=900&q=80" alt="Jeans mom"><div class="nombre">Mom →</div></div>
 <div class="producto sub" onclick="ir('j-semi')"><div class="nombre">Semiclásicos →</div></div>
 <div class="producto sub" onclick="ir('j-clas')"><div class="nombre">Clásicos →</div></div>
-<div class="producto sub" onclick="ir('j-bag')"><div class="nombre">Baggys →</div></div>
+<div class="producto sub" onclick="ir('j-bag')"><img class="sub-thumb" src="https://images.unsplash.com/photo-1602293589914-9e418c6f2098?auto=format&fit=crop&w=900&q=80" alt="Jeans baggy"><div class="nombre">Baggys →</div></div>
 <div class="producto sub" onclick="ir('j-car')"><div class="nombre">Cargos →</div></div>
 <div class="producto sub" onclick="ir('j-ofer')"><div class="badge">OFERTAS</div><div class="nombre">Ofertas →</div></div>
 <div class="producto sub" onclick="ir('j-camps')"><div class="nombre">Camperas →</div></div>
@@ -523,7 +642,7 @@ footer {
 <button class="btn-volver" onclick="ir('inicio')">← Volver</button>
 <h2 class="titulo">BERMUDAS</h2>
 <div class="productos">
-<div class="producto sub" onclick="ir('berm-clasicas')"><div class="nombre">Clásicas →</div></div>
+<div class="producto sub" onclick="ir('berm-clasicas')"><img class="sub-thumb" src="https://images.unsplash.com/photo-1506629905859-9e04be0f9b2d?auto=format&fit=crop&w=900&q=80" alt="Bermudas clásicas"><div class="nombre">Clásicas →</div></div>
 <div class="producto sub" onclick="ir('berm-baggys')"><div class="nombre">Baggys →</div></div>
 <div class="producto sub" onclick="ir('berm-chino-spandex')"><div class="nombre">Chino Spandex →</div></div>
 <div class="producto sub" onclick="ir('berm-flecos')"><div class="nombre">Flecos →</div></div>
@@ -593,8 +712,8 @@ footer {
 <button class="btn-volver" onclick="ir('inicio')">← Volver</button>
 <h2 class="titulo">LINO</h2>
 <div class="productos">
-<div class="producto sub" onclick="ir('lino-camisas')"><div class="nombre">Camisas →</div></div>
-<div class="producto sub" onclick="ir('lino-pantalones')"><div class="nombre">Pantalones →</div></div>
+<div class="producto sub" onclick="ir('lino-camisas')"><img class="sub-thumb" src="https://images.unsplash.com/photo-1598033129183-c4f50c736f10?auto=format&fit=crop&w=900&q=80" alt="Camisas de lino"><div class="nombre">Camisas →</div></div>
+<div class="producto sub" onclick="ir('lino-pantalones')"><img class="sub-thumb" src="https://images.unsplash.com/photo-1516826957135-700dedea698c?auto=format&fit=crop&w=900&q=80" alt="Pantalones de lino"><div class="nombre">Pantalones →</div></div>
 <div class="producto sub" onclick="ir('lino-bermudas')"><div class="nombre">Bermudas →</div></div>
 <div class="producto sub" onclick="ir('lino-conjuntos')"><div class="nombre">Conjuntos →</div></div>
 </div>
@@ -645,7 +764,7 @@ footer {
   <button class="btn-volver" onclick="ir('inicio')">← Volver</button>
   <h2 class="titulo">GABARDINA</h2>
   <div class="productos">
-    <div class="producto sub" onclick="ir('gab-chinos')"><div class="nombre">Pantalones Chinos →</div></div>
+    <div class="producto sub" onclick="ir('gab-chinos')"><img class="sub-thumb" src="https://images.unsplash.com/photo-1475178626620-a4d074967452?auto=format&fit=crop&w=900&q=80" alt="Pantalones gabardina chinos"><div class="nombre">Pantalones Chinos →</div></div>
     <div class="producto sub" onclick="ir('gab-kargo')"><div class="nombre">Kargo →</div></div>
     <div class="producto sub" onclick="ir('gab-carpintero')"><div class="nombre">Carpintero →</div></div>
     <div class="producto sub" onclick="ir('gab-camisaco')"><div class="nombre">Camisaco →</div></div>
@@ -695,7 +814,7 @@ footer {
     <h2 class="titulo">CHOMBAS</h2>
     <div class="productos">
         <div class="producto sub" onclick="ir('chomb-alg')"><div class="nombre">Chomba Algodon →</div></div>
-        <div class="producto sub" onclick="ir('chomb-pique')"><div class="nombre">Chomba Pique →</div></div>
+        <div class="producto sub" onclick="ir('chomb-pique')"><img class="sub-thumb" src="https://images.unsplash.com/photo-1527719327859-c6ce80353573?auto=format&fit=crop&w=900&q=80" alt="Chombas piqué"><div class="nombre">Chomba Pique →</div></div>
         <div class="producto sub" onclick="ir('chomb-import')"><div class="nombre">Chombas Importadas →</div></div>
         <div class="producto sub" onclick="ir('chomb-ofert')"><div class="nombre">Chombas Oferta →</div></div>
     </div>
@@ -744,7 +863,7 @@ footer {
     <button class="btn-volver" onclick="ir('inicio')">← Volver</button>
     <h2 class="titulo">CAMISAS</h2>
     <div class="productos">
-        <div class="producto sub" onclick="ir('cam-lisas')"><div class="nombre">Camisa Elastizada →</div></div>
+        <div class="producto sub" onclick="ir('cam-lisas')"><img class="sub-thumb" src="https://images.unsplash.com/photo-1603252109303-2751441dd157?auto=format&fit=crop&w=900&q=80" alt="Camisas elastizadas"><div class="nombre">Camisa Elastizada →</div></div>
         <div class="producto sub" onclick="ir('cam-estamp')"><div class="nombre">Camisa Estampada →</div></div>
     </div>
 </div>
@@ -786,7 +905,7 @@ footer {
     <br>
     <h2 class="titulo">SWEATERS</h2>
     <div class="productos">
-        <div class="producto sub" onclick="ir('sw-elas')"><div class="nombre">Sweaters elastizados →</div></div>
+        <div class="producto sub" onclick="ir('sw-elas')"><img class="sub-thumb" src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?auto=format&fit=crop&w=900&q=80" alt="Sweaters elastizados"><div class="nombre">Sweaters elastizados →</div></div>
         <div class="producto sub" onclick="ir('sw-clasic')"><div class="nombre">Sweater Clásico →</div></div> <div class="producto sub" onclick="ir('sw-ofert')"><div class="nombre">Sweater Oferta →</div></div>
     </div>
 </div>
@@ -833,7 +952,7 @@ footer {
     <button class="btn-volver" onclick="ir('inicio')">← Volver</button>
     <h2 class="titulo">BUZOS</h2>
     <div class="productos">
-        <div class="producto sub" onclick="ir('buz-rust')"><div class="nombre">Buzos Rusticos →</div></div>
+        <div class="producto sub" onclick="ir('buz-rust')"><img class="sub-thumb" src="https://images.unsplash.com/photo-1520975916090-3105956dac38?auto=format&fit=crop&w=900&q=80" alt="Buzos rústicos"><div class="nombre">Buzos Rusticos →</div></div>
         <div class="producto sub" onclick="ir('buz-ofert')"><div class="nombre">Buzos oferta →</div></div>
         <div class="producto sub" onclick="ir('camp-rust')"><div class="nombre">Camperas rusticas →</div></div>
     </div>
@@ -886,7 +1005,7 @@ footer {
     <div class="productos">
         <div class="producto sub" onclick="ir('a-cint')"><div class="nombre">Cintos Cuero →</div></div>
         <div class="producto sub" onclick="ir('a-bill')"><div class="nombre">Billeteras →</div></div>
-        <div class="producto sub" onclick="ir('a-gor')"><div class="nombre">Gorras →</div></div>
+        <div class="producto sub" onclick="ir('a-gor')"><img class="sub-thumb" src="https://images.unsplash.com/photo-1521369909029-2afed882baee?auto=format&fit=crop&w=900&q=80" alt="Gorras"><div class="nombre">Gorras →</div></div>
         <div class="producto sub" onclick="ir('a-riñ')"><div class="nombre">Riñoneras →</div></div>
     </div>
 </div>
@@ -934,7 +1053,25 @@ footer {
 </div>
 
 
-</div> <footer>
+</div> 
+</div>
+
+<div class="chat-widget">
+  <button class="chat-toggle" onclick="abrirChat()">💬 Asesor virtual Depo Jeans</button>
+  <div id="chatBox" class="chat-box oculto">
+    <h4>Preguntas rápidas</h4>
+    <div id="chatLog" class="chat-log">¡Hola! Elegí una consulta y te respondemos al instante.</div>
+    <div class="chat-qs">
+      <button onclick="responderChat('horarios')">¿Qué horarios tienen?</button>
+      <button onclick="responderChat('pagos')">¿Qué medios de pago aceptan?</button>
+      <button onclick="responderChat('cambios')">¿Cómo son los cambios?</button>
+      <button onclick="responderChat('sucursales')">¿Dónde están ubicados?</button>
+      <button onclick="responderChat('mayorista')">Quiero comprar por mayor</button>
+    </div>
+  </div>
+</div>
+
+<footer>
   <p style="color:white;font-size:18px">DEPO JEANS</p>
   <p>&copy; 2026</p>
 </footer>
@@ -962,10 +1099,41 @@ function ir(seccion) {
 
   var destino = document.getElementById(seccion);
   if (destino) {
-    destino.className = '';
+    destino.className = 'section-shell';
   }
-  window.scrollTo(0, 0);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+var mensajesChat = {
+  horarios: '🕐 Lunes a sábado de 9:00 a 20:00 hs en todas las sucursales.',
+  pagos: '💳 Efectivo 15% OFF, débito precio de lista, crédito bancaria 3 cuotas sin interés y financiera en 3 cuotas con recargo.',
+  cambios: '🔄 Podés cambiar dentro de los 30 días. Se toma el valor de lista vigente al momento del cambio.',
+  sucursales: '📍 Estamos en Berazategui, Quilmes, Lomas, Solano, Florencio Varela y Flores.',
+  mayorista: '📦 Para mayorista escribinos al +54 11 3845-4255 y te enviamos catálogo actualizado.'
+};
+
+function abrirChat() {
+  var box = document.getElementById('chatBox');
+  box.classList.toggle('oculto');
+}
+
+function responderChat(clave) {
+  var log = document.getElementById('chatLog');
+  log.textContent = mensajesChat[clave] || 'En breve te responde un asesor.';
+}
+
+var mensajesActivos = [
+  '🔥 Activo ahora: Promo 2x1 en remeras seleccionadas + asesoría por WhatsApp en menos de 5 minutos.',
+  '🚚 Activo ahora: Reservá online y retirás en sucursal el mismo día.',
+  '⭐ Activo ahora: Llegaron nuevos jeans baggy y cargos de temporada.'
+];
+var iMensaje = 0;
+setInterval(function(){
+  var el = document.getElementById('liveText');
+  if (!el) return;
+  iMensaje = (iMensaje + 1) % mensajesActivos.length;
+  el.textContent = mensajesActivos[iMensaje];
+}, 3800);
 </script>
 
 </body>
